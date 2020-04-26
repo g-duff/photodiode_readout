@@ -1,8 +1,6 @@
-#define delayTime 250
 #define LED645 3
 #define LED660 6
 #define inPin 0
-int repeats = 3;
 
 void setup()
 {
@@ -15,12 +13,17 @@ void setup()
 
 void loop()
 {
-    // Declare variables
-    int brightout;
+    // Control variables
+    int delayTime = 250;
+    int repeats = 3;
+
+    // Process variables
+    int brightout, i;
+
     String outspace = " ";
-    bool LED645status;
-    bool LED660status;
-    int i;
+
+    bool LED645status = false;
+    bool LED660status = false;
 
     // 645nm LED
     LED645status = true;
