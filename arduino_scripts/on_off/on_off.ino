@@ -14,8 +14,8 @@ void setup()
 void loop()
 {
     // Control variables
-    int delayTime = 250;
-    int repeats = 3;
+    int repeatTime = 100;
+    int repeats = 25;
 
     // Process variables
     int brightout, i;
@@ -28,40 +28,40 @@ void loop()
     // 645nm LED
     LED645status = true;
     digitalWrite(LED645, LED645status);
-    delay(delayTime);
     
     for (i=0; i<repeats; i++) {
         brightout = analogRead(inPin);
         Serial.println(LED645status + outspace + LED660status + outspace + brightout);
+        delay(repeatTime);
     }
 
     // Off
     LED645status = false;
     digitalWrite(LED645, LED645status);
-    delay(delayTime);
 
     for (i=0; i<repeats; i++) {
         brightout = analogRead(inPin);
         Serial.println(LED645status + outspace + LED660status + outspace + brightout);
+        delay(repeatTime);
     }
 
     // 660nm LED
     LED660status = true;
     digitalWrite(LED660, LED660status);
-    delay(delayTime);
 
     for (i=0; i<repeats; i++) {
         brightout = analogRead(inPin);
         Serial.println(LED645status + outspace + LED660status + outspace + brightout);
+        delay(repeatTime);
     }
 
     // Off
     LED660status = false;
     digitalWrite(LED660, LED660status);
-    delay(delayTime);
 
     for (i=0; i<repeats; i++) {
         brightout = analogRead(inPin);
         Serial.println(LED645status + outspace + LED660status + outspace + brightout);
+        delay(repeatTime);
     }
 }

@@ -2,7 +2,7 @@
 #define LED660 6
 #define inPin 0
 
-void read_multiple(float &bright_mean, float &bright_var);
+void read_multiple(float &bright_mean, float &bright_var, int &repeats);
 
 void setup()
 {
@@ -16,7 +16,7 @@ void setup()
 void loop()
 {
     // Control variables
-    int delayTime = 500;
+    int delayTime = 250;
     int repeats = 10;
 
     // Process variables
