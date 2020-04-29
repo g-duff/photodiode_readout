@@ -23,6 +23,8 @@ s = np.zeros(trace_length)
 
 # Initialize figure
 fig, ax = plt.subplots()
+ax.set_xlabel('Time (arbitrary)')
+ax.set_ylabel('Voltage (arbitrary)')
 ax.set_xlim(0, trace_length)
 ax.set_ylim(0, 1000)
 trace, = ax.plot(T, s, color='k')
