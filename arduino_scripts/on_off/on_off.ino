@@ -18,50 +18,22 @@ void loop()
     int repeats = 25;
 
     // Process variables
-    int brightout, i;
+    int brightout;
 
     String outspace = " ";
 
-    bool LED645status = false;
-    bool LED660status = false;
-
-    // 645nm LED
-    LED645status = true;
-    digitalWrite(LED645, LED645status);
+    bool LED645status[4] = {true, false, false, false};
+    bool LED660status[4] = {false, false, true, false};
     
-    for (i=0; i<repeats; i++) {
-        brightout = analogRead(inPin);
-        Serial.println(LED645status + outspace + LED660status + outspace + brightout);
-        delay(repeatTime);
-    }
+    for (int i=0; i<4; i++) {
 
-    // Off
-    LED645status = false;
-    digitalWrite(LED645, LED645status);
+        digitalWrite(LED645, LED645status[i]);
+        digitalWrite(LED660, LED660status[i]);
 
-    for (i=0; i<repeats; i++) {
-        brightout = analogRead(inPin);
-        Serial.println(LED645status + outspace + LED660status + outspace + brightout);
-        delay(repeatTime);
-    }
-
-    // 660nm LED
-    LED660status = true;
-    digitalWrite(LED660, LED660status);
-
-    for (i=0; i<repeats; i++) {
-        brightout = analogRead(inPin);
-        Serial.println(LED645status + outspace + LED660status + outspace + brightout);
-        delay(repeatTime);
-    }
-
-    // Off
-    LED660status = false;
-    digitalWrite(LED660, LED660status);
-
-    for (i=0; i<repeats; i++) {
-        brightout = analogRead(inPin);
-        Serial.println(LED645status + outspace + LED660status + outspace + brightout);
-        delay(repeatTime);
+        for (int j=0; j<repeats; j++) {
+            brightout = analogRead(inPin);
+            Serial.println(LED645status[i] + outspace + LED660status[i] + outspace + brightout);
+            delay(repeatTime);
+        }
     }
 }

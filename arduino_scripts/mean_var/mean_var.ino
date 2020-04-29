@@ -24,44 +24,18 @@ void loop()
 
     float bright_mean, bright_var;
 
-    bool LED645status=false;
-    bool LED660status=false;
+    bool LED645status[4] = {true, false, false, false};
+    bool LED660status[4] = {false, false, true, false};
 
-    // 645nm LED
-    LED645status = true;
-    digitalWrite(LED645, LED645status);
-    delay(delayTime);
+    for (int i=0; i<4; i++) {
+        digitalWrite(LED645, LED645status[i]);
+        digitalWrite(LED660, LED660status[i]);
+        delay(delayTime);
 
-    read_multiple(bright_mean, bright_var, repeats);
-    Serial.println(LED645status + outspace + LED660status +
-        outspace + bright_mean + outspace + bright_var);
-
-    // Off
-    LED645status = false;
-    digitalWrite(LED645, LED645status);    
-    delay(delayTime);
-
-    read_multiple(bright_mean, bright_var, repeats);
-    Serial.println(LED645status + outspace + LED660status +
-                   outspace + bright_mean + outspace + bright_var);
-
-    // 660nm LED
-    LED660status = true;
-    digitalWrite(LED660, LED660status);
-    delay(delayTime);
-
-    read_multiple(bright_mean, bright_var, repeats);
-    Serial.println(LED645status + outspace + LED660status +
-                   outspace + bright_mean + outspace + bright_var);
-
-    // Off
-    LED660status = false;
-    digitalWrite(LED660, LED660status);
-    delay(delayTime);
-
-    read_multiple(bright_mean, bright_var, repeats);
-    Serial.println(LED645status + outspace + LED660status +
-                   outspace + bright_mean + outspace + bright_var);
+        read_multiple(bright_mean, bright_var, repeats);
+        Serial.println(LED645status[i] + outspace + LED660status[i] +
+            outspace + bright_mean + outspace + bright_var);
+    }
 }
 
 void read_multiple(float &bright_mean, float &bright_var, int &repeats)
