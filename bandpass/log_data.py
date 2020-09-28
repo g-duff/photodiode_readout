@@ -12,6 +12,6 @@ while True:
     l = l.decode().split(' ')
     now = datetime.now()
     decoded = np.array(l[:-1], dtype=np.float)
-    np.savetxt(f'./data/{i:06d}.csv', decoded, header=str(datetime.now()))
-    i += 1
+    np.savetxt(f'./data/{i:06d}.csv', decoded, header=str(datetime.now().time()))
     print(i)
+    i += 1
