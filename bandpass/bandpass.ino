@@ -117,9 +117,9 @@ void setup()
 
   ledp >>= 1; // 50% duty cycle
 
-  for (int i = 1; i < Nsamples + 1; i++)
+  for (int i = 2; i < Nsamples + 2; i++)
   {
-    ledArray[i - 1] = onoff;
+    ledArray[i - 2] = onoff;
     if (i % ledp == 0)
     {
       onoff = onoff ^ 1;
@@ -149,6 +149,7 @@ void loop()
 
     cli();
     String outStr;
+    outStr += String(ledPin) + ' ';
     for (int i = 0; i < d; i++)
     {
       outStr += String(dataArray[i]) + ' ';
@@ -177,8 +178,8 @@ ISR(TCA0_CMP1_vect)
   TCA0.SINGLE.INTFLAGS |= bit(5);
 
   // Read photodiode and write LEDs
-  digitalWrite(ledPin, ledArray[d]);
   anaIn = analogRead(anaPin);
+  digitalWrite(ledPin, ledArray[d]);
 
   if (d < Nsamples)
   {
