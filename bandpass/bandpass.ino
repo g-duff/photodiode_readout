@@ -98,9 +98,9 @@ void setup()
   // Sampling parameters
   unsigned int ledp = 6; // Period of LED 1 oscillation in sampling cycles
   unsigned int per_value;
-  per_value = 499; // Corresponds to 0.500KHz sampling
-                   //    per_value = 399;    // Corresponds to 0.625Khz sampling
-                   //  per_value = 249;    // Corresponds to 1.000Khz sampling
+  //    per_value = 499;    // Corresponds to 0.500KHz sampling
+  //    per_value = 399;    // Corresponds to 0.625Khz sampling
+  per_value = 249; // Corresponds to 1.000Khz sampling
                    //    per_value = 199;    // Corresponds to 1.250KHz sampling
                    //    per_value = 124;     // Corresponds to 2.000KHz sampling
                    //    per_value = 99;    // Corresp onds to 2.500KHz sampling
@@ -113,13 +113,13 @@ void setup()
   pinMode(anaPin, INPUT);
 
   // Assign array values for LED signals
-  bool onoff = 1;
+  bool onoff = 0;
 
   ledp >>= 1; // 50% duty cycle
 
-  for (int i = 0; i < Nsamples; i++)
+  for (int i = 1; i < Nsamples + 1; i++)
   {
-    ledArray[i] = onoff;
+    ledArray[i - 1] = onoff;
     if (i % ledp == 0)
     {
       onoff = onoff ^ 1;
@@ -149,7 +149,6 @@ void loop()
 
     cli();
     String outStr;
-    outStr += String(ledPin) + ' ';
     for (int i = 0; i < d; i++)
     {
       outStr += String(dataArray[i]) + ' ';
@@ -178,8 +177,8 @@ ISR(TCA0_CMP1_vect)
   TCA0.SINGLE.INTFLAGS |= bit(5);
 
   // Read photodiode and write LEDs
-  anaIn = analogRead(anaPin);
   digitalWrite(ledPin, ledArray[d]);
+  anaIn = analogRead(anaPin);
 
   if (d < Nsamples)
   {
